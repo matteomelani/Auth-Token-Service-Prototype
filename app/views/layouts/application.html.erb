@@ -9,7 +9,12 @@
 <body>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
-
+  <p>
+    <%= current_user.email  if user_signed_in? %>
+  </p>
+  <p>
+    <%= current_user.authentication_token  if user_signed_in? %>
+  </p>
 <%= yield %>
 
 </body>
