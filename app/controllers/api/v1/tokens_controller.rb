@@ -36,9 +36,14 @@ class Api::V1::TokensController  < ApplicationController
   end
   
   def destroy
-    @user=User.find_by_token(params[:token])
-    @user.reset_authentication_token!
-    render :status=>200, :json=>{:token=>params[:token]}
+    @user=User.find_by_authentication_token(params[:token])
+    if @user.nil?
+      logger.info(“Token not found.”)
+      render :status=>404, :json=>{:message=>”Invalid token.”}
+    else
+      @user.reset_authentication_token!
+      render :status=>200, :json=>{:token=>params[:token]}
+    end
   end  
 
 end  
