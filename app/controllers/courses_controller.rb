@@ -9,7 +9,7 @@ class CoursesController < ApplicationController
   end
   
   def show
-    @course=Create.find(params[:id])
+    @course=Course.find(params[:id])
     respond_with(@course)
   end
   
